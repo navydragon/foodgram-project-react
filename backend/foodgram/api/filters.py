@@ -17,9 +17,7 @@ class RecipeFilter(filter.FilterSet):
         to_field_name='slug'
     )
     is_favorited = filter.BooleanFilter(method='get_favorite')
-    is_in_shopping_cart = filter.BooleanFilter(
-        method='get_is_in_shopping_cart')
-
+    is_in_shopping_cart = filter.BooleanFilter(method='get_is_in_shopping_cart')
     class Meta:
         model = Recipe
         fields = ['tags', 'author', 'is_favorited', 'is_in_shopping_cart']

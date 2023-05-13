@@ -1,22 +1,19 @@
 import json
+
 from django.core.management.base import BaseCommand
-from recipes.models import Ingredient
 from django.db import connection
+
+from recipes.models import Ingredient
+
 
 class Command(BaseCommand):
     help = 'Load data from JSON file into database'
 
     def add_arguments(self, parser):
-        parser.add_argument('file', type=str, help='JSON file to load data from')
+        parser.add_argument('file', type=str,
+                            help='JSON file to load data from')
 
     def handle(self, *args, **options):
-
-        # очищаем данные
-        # Ingredient.objects.all().delete()
-        # with connection.cursor() as cursor:
-        #     cursor.execute('DELETE FROM "recipes_ingredient"')
-        #     cursor.execute(
-        #         "UPDATE sqlite_sequence  SET seq = 0 WHERE name = 'recipes_ingredient'")
         # Получаем имя файла из аргументов команды
         file_name = options['file']
 
