@@ -1,4 +1,4 @@
-![Project status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![Project status](https://github.com/navydragon/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 
 #  Сайт Foodgram, «Продуктовый помощник»
 ---
