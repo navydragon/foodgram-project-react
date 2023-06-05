@@ -200,7 +200,8 @@ def generate_ingridient_list(user):
         'ingredient__name', 'ingredient__measurement_unit'
     ).annotate(amount=Sum('amount'))
     ingredient_list = ', '.join([
-        f"{ingredient['ingredient__name']} - {ingredient['amount']} {ingredient['ingredient__measurement_unit']}"
+        f"{ingredient['ingredient__name']} - {ingredient['amount']} "
+        f"{ingredient['ingredient__measurement_unit']}"
         for ingredient in ingredients
     ])
     ingredient_list = f"Cписок покупок:\n{ingredient_list}"

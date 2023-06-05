@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import UniqueConstraint
+
 
 User = get_user_model()
 
@@ -74,9 +75,15 @@ class Recipe(models.Model):
     )
     cooking_time = models.PositiveIntegerField(
         verbose_name='Время приготовления',
-        validators=[MinValueValidator(
-            1, message='Время приготовления должно быть не менее 1 минуты!'
-        )]
+        validators=[
+            MinValueValidator(
+                1,message='Время приготовления должно быть не менее 1 минуты!'
+            ),
+            MaxValueValidator(
+                32000,
+                message='Время приготовления должно быть не более 32000 минут!'
+            )
+        ]
     )
     pub_date = models.DateTimeField(
         'Время публикации',
@@ -105,7 +112,7 @@ class RecipeIngredient(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Ингредиент'
     )
-    amount = models.IntegerField(
+    amount = models.PositiveIntegerField(
         'Количество',
         validators=[MinValueValidator(1)]
     )
