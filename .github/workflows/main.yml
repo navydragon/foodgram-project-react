@@ -42,7 +42,7 @@ jobs:
         with:
           push: true
           context: ./backend/foodgram/
-          tags: navydragons/foodgram_backend:latest
+          tags: navydragons/foodgram_backend:v1
 
   deploy:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo docker pull navydragons/foodgram_backend:latest
+            sudo docker pull navydragons/foodgram_backend:v1
             sudo docker pull navydragons/foodgram_frontend:v1
             sudo docker-compose stop
             sudo docker-compose rm backend
