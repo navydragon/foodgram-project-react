@@ -10,7 +10,8 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ['username', 'email']
     ordering = ['username']
     empty_value_display = ''
-
+    exclude = ['last_login']
+    readonly_fields = ('last_login','password')
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):

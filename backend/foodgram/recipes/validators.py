@@ -1,0 +1,12 @@
+from django.core.exceptions import ValidationError
+
+import re
+
+
+def hex_field_validator(value):
+
+    message = (
+        'Введите цвет в формате HEX.'
+    )
+    if not re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', value):
+        raise ValidationError(message)

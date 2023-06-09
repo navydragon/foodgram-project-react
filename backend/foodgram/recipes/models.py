@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import UniqueConstraint
- 
+
+from colorfield.fields import ColorField
+from recipes.validators import hex_field_validator
 
 User = get_user_model()
 
@@ -32,7 +34,12 @@ class Tag(models.Model):
     """ Модель тега. """
 
     name = models.CharField('Название тега', unique=True, max_length=200)
-    color = models.CharField('Цвет', unique=True, max_length=7)
+    color = ColorField(
+        format='hex',
+        default='#FF0000',
+        verbose_name='Цветовой HEX-код',
+        help_text='Цветовой HEX-код',
+        validators=[hex_field_validator])
     slug = models.SlugField('Slug', unique=True, max_length=200)
 
     class Meta:
@@ -172,6 +179,8 @@ class ShoppingCart(models.Model):
                 name='user_shoppingcart_unique'
             )
         ]
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
 
 
 class Favorite(models.Model):
@@ -197,3 +206,5 @@ class Favorite(models.Model):
                 name='user_favorite_unique'
             )
         ]
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'

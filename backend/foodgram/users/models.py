@@ -21,6 +21,8 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ['-pk']
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
     def __str__(self):
         return self.username
@@ -49,6 +51,8 @@ class Subscription(models.Model):
                 name='user_author_unique'
             )
         ]
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
 
     def __str__(self):
         return f'Пользователь {self.user} подписался на {self.author}'
