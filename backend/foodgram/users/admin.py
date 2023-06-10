@@ -1,11 +1,18 @@
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 
 from .models import Subscription, User
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'first_name', 'last_name']
+    def password_reset_link(self, obj):
+        change_password_url = reverse('admin:password_change', args=[obj.id])
+        return format_html('<a href="{}">Сменить пароль</a>',
+                           change_password_url)
+
+    list_display = ['username', 'email', 'first_name', 'last_name', 'password_reset_link']
     search_fields = ['username', 'email']
     list_filter = ['username', 'email']
     ordering = ['username']
