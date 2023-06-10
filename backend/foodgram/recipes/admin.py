@@ -48,4 +48,5 @@ class ShoppingCartAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'color', 'slug']
     search_fields = ['name', 'slug']
+    list_filter = ('name',)
     empty_value_display = ''
